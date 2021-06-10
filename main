@@ -1,0 +1,123 @@
+
+
+const int  BUTTON = 8;    // pin di input a cui è collegato il pulsante
+const int LED1 = 2;       // LED collegato al pin digitale 2
+const int LED2 = 3;       // LED collegato al pin digitale 3
+const int LED3 = 4;       // LED collegato al pin digitale 4
+const int LED4 = 5;       // LED collegato al pin digitale 5
+const int LED5 = 6;       // LED collegato al pin digitale 6
+
+// Variabili globali (tutti interi)
+int statoButton     = 0;      // stato del pulsante (inizialmente non premuto)
+int lastStatoButton = 0;      // ultimo stato del pulsante (per ora non premuto)
+int countButton     = 0;      // Conteggio del bottone
+
+// Avvio dell'applicazione
+void setup()
+{
+    // imposta il pin digitale dei led come output
+  pinMode(LED1, OUTPUT); 
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
+  pinMode(LED4, OUTPUT);
+  pinMode(LED5, OUTPUT);   
+
+  // imposta il pin digitale come input
+  pinMode(BUTTON, INPUT);    
+
+   
+}   
+
+// Avvio del loop
+void loop()
+{
+
+  // Verifico se l'utente ha premuto il bottone
+  if(digitalRead(BUTTON))
+  {
+    // Aspetto 15ms per far alzare il dito all'utente
+    delay(15);
+    // Cambio l'ultimo stato del bottone
+    if(lastStatoButton==0) lastStatoButton=1;
+    else lastStatoButton=0;
+    // Aumento il count del bottone
+    if(countButton<=6) countButton=countButton+1;
+    else countButton=0;
+  }
+
+  // In base allo stato del bottone scelgo l'azione del led
+  switch (countButton)
+  {
+      case 0:
+    digitalWrite(LED1, LOW);   // sepgne il LED
+    digitalWrite(LED2, LOW);   // spegne il LED
+    digitalWrite(LED3, LOW);   // spegne il LED
+    digitalWrite(LED4, LOW);   // spegne il LED
+    digitalWrite(LED5, LOW);   // spegne il LED   
+    delay(200);    
+    break;
+
+case 1:
+    digitalWrite(LED1, HIGH);  // accende il LED
+    digitalWrite(LED2, LOW);   // spegne il LED
+    digitalWrite(LED3, LOW);   // spegne il LED
+    digitalWrite(LED4, LOW);   // spegne il LED
+    digitalWrite(LED5, LOW);   // spegne il LED
+
+    delay(200);              // aspetta un secondo
+    break;
+
+    // Led lampeggia ogni secondo
+  case 2:
+    digitalWrite(LED1, LOW);    // spegne il LED
+    digitalWrite(LED2, HIGH);   // accende il LED
+    digitalWrite(LED3, LOW);   // spegne il LED
+    digitalWrite(LED4, LOW);   // spegne il LED
+    digitalWrite(LED5, LOW);   // spegne il LED
+    
+    delay(200); 
+    break;
+
+  case 3:
+    digitalWrite(LED1, LOW);  // spegne il LED
+    digitalWrite(LED2, LOW);   // spegne il LED
+    digitalWrite(LED3, HIGH);   // accende il LED
+    digitalWrite(LED4, LOW);   // spegne il LED
+    digitalWrite(LED5, LOW);   // spegne il LED
+    
+    delay(200); 
+    break;
+  
+  case 4:
+    digitalWrite(LED1, LOW);  // spegne il LED
+    digitalWrite(LED2, LOW);   // spegne il LED
+    digitalWrite(LED3, LOW);   // spegne il LED
+    digitalWrite(LED4, HIGH);   // accende il LED
+    digitalWrite(LED5, LOW);   // spegne il LED
+    
+    delay(200); 
+    break;
+
+  case 5:
+    digitalWrite(LED1, LOW);  // spegne il LED
+    digitalWrite(LED2, LOW);   // spegne il LED
+    digitalWrite(LED3, LOW);   // spegne il LED
+    digitalWrite(LED4, LOW);   // spegne il LED
+    digitalWrite(LED5, HIGH);   // accende il LED
+    
+    delay(200); 
+    break;
+    
+  case 6:
+    digitalWrite(LED1, HIGH);  // accende il LED
+    digitalWrite(LED2, HIGH);   // accende il LED
+    digitalWrite(LED3, HIGH);   // accende il LED
+    digitalWrite(LED4, HIGH);   // accende il LED
+    digitalWrite(LED5, HIGH);   // accende il LED
+    
+    delay(200); 
+    break;
+
+    break;
+  }
+}
